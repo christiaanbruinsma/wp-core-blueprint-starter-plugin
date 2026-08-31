@@ -68,21 +68,24 @@ final class Page implements PageContract {
 			echo Notice::render( [
 				'variant' => Notice::INFO,
 				'title'   => __( 'Base owns the shared design', 'core-blueprint-starter' ),
-				'message' => __( 'This notice and the panels below are styled by Core Blueprint Base. The starter CSS only composes them into an example layout.', 'core-blueprint-starter' ),
+				'message' => __( 'This notice and the panel below are styled by Core Blueprint Base. The starter CSS only composes product-specific content inside that shared presentation.', 'core-blueprint-starter' ),
 			] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Base renderer returns escaped component HTML.
 			?>
 
-			<div class="cb-starter-example-grid">
-				<section class="cb-core-panel">
-					<h2><?php esc_html_e( 'Public contracts', 'core-blueprint-starter' ); ?></h2>
-					<p><?php esc_html_e( 'Extension identity, admin registration, health and governance use documented Base APIs instead of Base internals.', 'core-blueprint-starter' ); ?></p>
-				</section>
+			<section class="cb-core-panel">
+				<h2><?php esc_html_e( 'Extension architecture', 'core-blueprint-starter' ); ?></h2>
+				<div class="cb-starter-example-grid">
+					<div>
+						<strong><?php esc_html_e( 'Public contracts', 'core-blueprint-starter' ); ?></strong>
+						<p><?php esc_html_e( 'Extension identity, admin registration, health and governance use documented Base APIs instead of Base internals.', 'core-blueprint-starter' ); ?></p>
+					</div>
 
-				<section class="cb-core-panel">
-					<h2><?php esc_html_e( 'Extension ownership', 'core-blueprint-starter' ); ?></h2>
-					<p><?php esc_html_e( 'Keep feature-specific composition here. Shared surfaces, controls, states and themes remain owned by Base.', 'core-blueprint-starter' ); ?></p>
-				</section>
-			</div>
+					<div>
+						<strong><?php esc_html_e( 'Extension ownership', 'core-blueprint-starter' ); ?></strong>
+						<p><?php esc_html_e( 'Keep feature-specific composition here. Shared surfaces, controls, states and themes remain owned by Base.', 'core-blueprint-starter' ); ?></p>
+					</div>
+				</div>
+			</section>
 		</div>
 		<?php
 	}
