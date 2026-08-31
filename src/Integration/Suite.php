@@ -36,9 +36,14 @@ final class Suite {
 	 * @return array<string,array<string,mixed>>
 	 */
 	public static function register_status_definition( array $definitions ): array {
+		$label = 'Starter Plugin';
+		if ( self::i18n_ready() ) {
+			$label = __( 'Starter Plugin', 'core-blueprint-starter' );
+		}
+
 		$definitions[ self::ID ] = [
 			'provider' => [ __CLASS__, 'status' ],
-			'label'    => 'Starter Plugin',
+			'label'    => $label,
 			'url'      => admin_url( 'admin.php?page=' . Page::SLUG ),
 		];
 
@@ -48,7 +53,7 @@ final class Suite {
 	/** @return array{state:string,detail:string,url:string} */
 	public static function status(): array {
 		$detail = 'Connected through the Core Blueprint public extension contracts.';
-		if ( did_action( 'init' ) > 0 || doing_action( 'init' ) ) {
+		if ( self::i18n_ready() ) {
 			$detail = __( 'Connected through the Core Blueprint public extension contracts.', 'core-blueprint-starter' );
 		}
 
@@ -57,5 +62,9 @@ final class Suite {
 			'detail' => $detail,
 			'url'    => admin_url( 'admin.php?page=' . Page::SLUG ),
 		];
+	}
+
+	private static function i18n_ready(): bool {
+		return did_action( 'init' ) > 0 || doing_action( 'init' );
 	}
 }
