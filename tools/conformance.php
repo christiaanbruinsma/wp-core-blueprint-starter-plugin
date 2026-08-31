@@ -47,6 +47,8 @@ $forbidden_php = [
 	'add_menu_page('                       => 'Core Admin pages must register through PageRegistry',
 	'add_submenu_page('                    => 'Core Admin pages must register through PageRegistry',
 	'PageBase'                             => 'Base PageBase is not the normative public page contract',
+	'Requires Plugins:'                    => 'first-party extensions use the runtime Base dependency guard, not a WordPress Requires Plugins header',
+	'filemtime('                           => 'starter assets use the release version rather than request-time file timestamps',
 	'jquery'                               => 'the starter is vanilla-JavaScript only',
 ];
 
@@ -69,13 +71,27 @@ foreach ( $php_files as $file ) {
 	}
 }
 
+$base_appearance_property = '/(^|;)\s*(?:background(?:-[a-z-]+)?|border(?:-[a-z-]+)?|border-radius|box-shadow|color|font(?:-[a-z-]+)?|padding(?:-[a-z-]+)?|text-shadow|outline(?:-[a-z-]+)?|transition(?:-[a-z-]+)?)\s*:/im';
+
 foreach ( cb_starter_files_with_extension( $root . '/assets/css', 'css' ) as $file ) {
 	$content = (string) file_get_contents( $file );
-	if ( preg_match( '/(^|[,{]\s*)\.cb-core-/m', $content ) ) {
-		$failures[] = sprintf(
-			'%s styles a Base-owned .cb-core-* primitive. Keep starter CSS composition-only.',
-			str_replace( $root . '/', '', $file )
-		);
+	if ( ! preg_match_all( '/([^{}]+)\{([^{}]*)\}/s', $content, $rules, PREG_SET_ORDER ) ) {
+		continue;
+	}
+
+	foreach ( $rules as $rule ) {
+		$selector     = trim( (string) $rule[1] );
+		$declarations = (string) $rule[2];
+		if ( ! str_contains( $selector, '.cb-core-' ) ) {
+			continue;
+		}
+		if ( preg_match( $base_appearance_property, $declarations ) ) {
+			$failures[] = sprintf(
+				'%s redraws Base-owned appearance in selector "%s". Composition/layout is allowed; canonical appearance stays in Base.',
+				str_replace( $root . '/', '', $file ),
+				preg_replace( '/\s+/', ' ', $selector )
+			);
+		}
 	}
 }
 
