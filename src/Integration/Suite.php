@@ -49,7 +49,7 @@ final class Suite {
 	public static function status(): array {
 		$detail = 'Connected through the Core Blueprint public extension contracts.';
 		if ( did_action( 'init' ) > 0 || doing_action( 'init' ) ) {
-			$detail = __( $detail, 'core-blueprint-starter' );
+			$detail = __( 'Connected through the Core Blueprint public extension contracts.', 'core-blueprint-starter' );
 		}
 
 		return [
