@@ -1,11 +1,9 @@
 <?php
 /**
  * Plugin Name:       Core Blueprint Starter Plugin
- * Plugin URI:        https://coreblueprint.io
  * Description:       Minimal production-grade starter for Core Blueprint extensions.
  * Version:           0.1.0
  * Author:            Core Blueprint
- * Author URI:        https://coreblueprint.io
  * License:           GPL-2.0+
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       core-blueprint-starter
