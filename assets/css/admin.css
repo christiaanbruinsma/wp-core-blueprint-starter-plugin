@@ -1,0 +1,13 @@
+/**
+ * Starter-owned Core Admin composition.
+ *
+ * Do not redraw Base Design Foundation primitives here. Shared surfaces,
+ * typography, states, controls and themes belong to Core Blueprint Base.
+ */
+
+.cb-starter-example-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: var(--cb-space-4);
+	margin-top: var(--cb-space-4);
+}
