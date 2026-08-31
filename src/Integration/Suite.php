@@ -47,9 +47,14 @@ final class Suite {
 
 	/** @return array{state:string,detail:string,url:string} */
 	public static function status(): array {
+		$detail = 'Connected through the Core Blueprint public extension contracts.';
+		if ( did_action( 'init' ) > 0 || doing_action( 'init' ) ) {
+			$detail = __( $detail, 'core-blueprint-starter' );
+		}
+
 		return [
 			'state'  => 'ok',
-			'detail' => __( 'Connected through the Core Blueprint public extension contracts.', 'core-blueprint-starter' ),
+			'detail' => $detail,
 			'url'    => admin_url( 'admin.php?page=' . Page::SLUG ),
 		];
 	}
