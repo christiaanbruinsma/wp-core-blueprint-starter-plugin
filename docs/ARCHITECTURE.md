@@ -100,6 +100,14 @@ Do not use:
 
 The starter does not emit its example event automatically.
 
+## Persistent data and uninstall
+
+The starter intentionally persists no product data of its own. It therefore does not ship an `uninstall.php` placeholder or a destructive uninstall routine.
+
+When deriving a real extension, add uninstall behavior only for data the extension itself owns. Do not remove Base-owned state, shared registry data, audit storage or unrelated WordPress content. If a feature uses custom tables, options, scheduled events or generated files, document its ownership and explicit uninstall policy before adding cleanup code.
+
+A no-op uninstall file is not useful boilerplate: absence of owned persistent data is the canonical default for this starter.
+
 ## Optional subsystems
 
 Database schema registration, module activation, REST, AJAX, cron and other feature-specific concerns are deliberately excluded from active boilerplate.
