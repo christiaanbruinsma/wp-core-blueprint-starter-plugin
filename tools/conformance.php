@@ -41,7 +41,9 @@ $php_files = array_merge(
 
 $forbidden_php = [
 	'cb-core-css-'                         => 'private Base CSS handles are not public API',
+	'cb_core_extensions'                   => 'legacy extension discovery must use ExtensionRegistry',
 	'cb_core_event_labels'                 => 'legacy event-label mutation is not the Governance contract',
+	'CB\\Core\\DB'                       => 'legacy/private Base database facade is not the extension schema contract',
 	'CB\\Core\\Log\\AuditLog'            => 'extensions must write through Governance\\Audit',
 	'CB\\Core\\Admin\\AdminAssetCatalog' => 'the Base asset catalog is private',
 	'add_menu_page('                       => 'Core Admin pages must register through PageRegistry',

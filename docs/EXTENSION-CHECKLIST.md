@@ -23,6 +23,7 @@ Use this checklist before turning the starter into a real plugin.
 - [ ] Runtime becomes inert if Base is later unavailable.
 - [ ] No standalone Core Admin fallback is introduced.
 - [ ] Compatibility is based on `CB_CORE_API_VERSION` unless an exact Base release is genuinely required.
+- [ ] Bootstrap dependency checks contain only public Base contracts the derived extension actually consumes.
 
 ## 3. Core Admin
 
@@ -115,11 +116,11 @@ Do not add custom schema machinery pre-emptively.
 
 - [ ] Internal ZIP root folder equals the canonical installed plugin folder.
 - [ ] No version/build/temporary name replaces the canonical root folder.
-- [ ] Development-only files are excluded according to the suite-wide release process.
+- [ ] Development-only files are excluded according to the project's verified release process.
 - [ ] `php tools/conformance.php` passes.
 - [ ] PHP syntax/static checks pass.
 - [ ] Activation/deactivation smoke tests pass.
 - [ ] Runtime tested with compatible Base and with Base dependency unavailable.
 - [ ] No PHP notices, missing style dependencies or early-translation warnings are present.
 
-Do not invent a plugin-specific release pipeline while Core Blueprint Base still owns/finalizes the suite-wide packaging contract.
+Do not present a plugin-specific release pipeline as a Core Blueprint platform contract until a suite-wide executable extension packaging contract is explicitly frozen.

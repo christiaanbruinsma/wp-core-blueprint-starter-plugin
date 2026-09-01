@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Core Blueprint Starter Plugin
  * Description:       Minimal production-grade starter for Core Blueprint extensions.
- * Version:           0.1.0
+ * Version:           0.1.1
  * Author:            Core Blueprint
  * License:           GPL-2.0+
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'CB_STARTER_VERSION',      '0.1.0' );
+define( 'CB_STARTER_VERSION',      '0.1.1' );
 define( 'CB_STARTER_REQUIRED_API', '1.0' );
 define( 'CB_STARTER_FILE',         __FILE__ );
 define( 'CB_STARTER_DIR',          plugin_dir_path( __FILE__ ) );
