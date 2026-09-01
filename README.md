@@ -9,7 +9,7 @@ This repository is deliberately not a feature plugin. It demonstrates the smalle
 The starter was authored against:
 
 - Core Blueprint Base public API: `1.0`
-- verified source reference: Base `1.0.0-rc3.29`
+- verified source reference: Base `1.0.0-rc3.32`
 - WordPress: `7.0+`
 - PHP: `8.4+`
 
@@ -47,6 +47,8 @@ Perform one complete identity pass before feature development:
 10. Re-run `php tools/conformance.php`.
 
 For first-party Core Blueprint extensions, the ExtensionRegistry ID and canonical plugin folder use the `core-blueprint-*` namespace and the plugin Author header remains exactly `Core Blueprint`.
+
+A derived extension should also narrow the bootstrap dependency check to the public Base contracts it actually uses. For example, if the Core Admin page example is removed, do not keep `PageRegistry` and `Page` as artificial runtime prerequisites. Dependency checks document real consumption, not every contract demonstrated by the original Starter.
 
 ## Design ownership
 
@@ -124,7 +126,7 @@ core-blueprint-starter-plugin/
 
 1. Complete the identity pass.
 2. Decide which public Base contracts the feature actually needs.
-3. Register only those contracts.
+3. Register only those contracts and remove unused Starter dependency checks/examples.
 4. Keep runtime code feature-specific and narrowly scoped.
 5. Use Base semantic components instead of private `cb-core-css-*` handles.
 6. Run the conformance script.
@@ -136,7 +138,7 @@ core-blueprint-starter-plugin/
 
 A canonical release ZIP must contain the canonical plugin folder as its single plugin root. Do not rename the internal plugin root to a version, branch, temporary build directory or GitHub archive name.
 
-This starter intentionally does **not** ship its own release builder yet. Core Blueprint Base release tooling is still being finalized; the starter should consume the suite-wide canonical build workflow once that contract is frozen rather than inventing a second packaging standard.
+This starter intentionally does **not** ship its own release builder yet. A suite-wide executable extension build contract has not been frozen; do not invent a plugin-specific packaging pipeline and mistake it for a Core Blueprint platform guarantee.
 
 ## Public API authority
 
