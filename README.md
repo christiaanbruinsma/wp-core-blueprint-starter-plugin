@@ -9,7 +9,7 @@ This repository is deliberately not a feature plugin. It demonstrates the smalle
 The starter was authored against:
 
 - Core Blueprint Base public API: `1.0`
-- verified source reference: Base `1.0.0-rc3.32`
+- verified source reference: Base `main` @ `09808d906a963bba6fd4e58ecde4aa870b0db3c8` (`1.0.0-rc1`)
 - WordPress: `7.0+`
 - PHP: `8.4+`
 
