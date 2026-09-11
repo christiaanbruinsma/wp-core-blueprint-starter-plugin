@@ -25,9 +25,10 @@ Runtime compatibility is based on `CB_CORE_API_VERSION`, not on the exact Base p
 - lazy module health through `cb_core_module_status_definitions`;
 - Governance metadata through `EventRegistry` and writes through `Audit::record()`;
 - WordPress-safe translation loading on `init`;
+- a deliberately non-loaded Automation Foundation provider reference with `semantic_type` examples;
 - no jQuery, compatibility bridge, service container or standalone fallback.
 
-Optional systems such as custom database tables, REST, AJAX, cron and module activation are intentionally **not** active boilerplate. See `docs/RECIPES.md`.
+Optional systems such as custom database tables, REST, AJAX, cron and module activation are intentionally **not** active boilerplate. The Automation Foundation example is also reference-only and is not loaded by the Starter. See `docs/RECIPES.md` and `docs/AUTOMATION-PROVIDER.md`.
 
 ## Before using this starter
 
@@ -44,7 +45,8 @@ Perform one complete identity pass before feature development:
 7. Replace `Admin\\Page::SLUG` with the new globally unique lower-case kebab-case page slug.
 8. Replace `cb-starter-*` asset handles and extension-owned CSS classes.
 9. Replace the example Governance namespace/event (`starter.example.updated`) with real product-domain events, or remove it when the plugin has no governance-relevant mutations.
-10. Re-run `php tools/conformance.php`.
+10. If adopting the Automation Foundation reference, replace every `example.*` capability, Starter semantic identity and fail-fast callback before loading it.
+11. Re-run `php tools/conformance.php`.
 
 For first-party Core Blueprint extensions, the ExtensionRegistry ID and canonical plugin folder use the `core-blueprint-*` namespace and the plugin Author header remains exactly `Core Blueprint`.
 
@@ -86,6 +88,16 @@ Extension CSS may compose product-specific layout:
 
 It must not locally redraw generic Base primitives such as panels, notices, cards, badges, buttons, form controls or tabs.
 
+## Automation ownership
+
+Automation Foundation follows a parallel ownership rule:
+
+> **Extensions own business semantics. Base owns interoperability. Automations owns orchestration.**
+
+The Starter's provider reference demonstrates capability declaration only. It does not emit triggers, invoke actions or state resolvers, define workflows, evaluate conditions, schedule work, retry failures or persist run history.
+
+See `docs/AUTOMATION-PROVIDER.md` before adapting `examples/AutomationProvider.php`.
+
 ## Base dependency behavior
 
 This starter has no standalone mode.
@@ -110,12 +122,15 @@ core-blueprint-starter-plugin/
 │   │   └── Assets.php
 │   └── Governance/
 │       └── Events.php
+├── examples/
+│   └── AutomationProvider.php
 ├── assets/
 │   └── css/
 │       └── admin.css
 ├── languages/
 ├── docs/
 │   ├── ARCHITECTURE.md
+│   ├── AUTOMATION-PROVIDER.md
 │   ├── EXTENSION-CHECKLIST.md
 │   └── RECIPES.md
 └── tools/
@@ -128,11 +143,12 @@ core-blueprint-starter-plugin/
 2. Decide which public Base contracts the feature actually needs.
 3. Register only those contracts and remove unused Starter dependency checks/examples.
 4. Keep runtime code feature-specific and narrowly scoped.
-5. Use Base semantic components instead of private `cb-core-css-*` handles.
-6. Run the conformance script.
-7. Test activation with and without compatible Base.
-8. Test the extension page in both Core Blueprint light and dark themes.
-9. Verify no PHP notices, missing WordPress style dependencies or early translation warnings occur.
+5. If the extension exposes automation capabilities, keep provider adapters thin and provider-owned; do not add an Automations dependency for discovery.
+6. Use Base semantic components instead of private `cb-core-css-*` handles.
+7. Run the conformance script.
+8. Test activation with and without compatible Base.
+9. Test the extension page in both Core Blueprint light and dark themes.
+10. Verify no PHP notices, missing WordPress style dependencies or early translation warnings occur.
 
 ## Packaging
 
@@ -145,6 +161,7 @@ This starter intentionally does **not** ship its own release builder yet. A suit
 When this starter and Base disagree, Base documentation wins. In particular, consult Base's:
 
 - `docs/PUBLIC-API.md`
+- `docs/AUTOMATION-FOUNDATION.md`
 - `docs/CORE-ADMIN-DESIGN-FOUNDATION.md`
 - Foundation-specific contract documents
 
